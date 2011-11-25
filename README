@@ -1,0 +1,41 @@
+PEBS is a backup infastructure written by James 'Pug' Jones 
+ <pug@pugsplace.net> on 13 January 2006. These scripts are 
+ licensed under the GNU GPL version 2 or later. See the included 
+ LICENSE file.
+
+These scripts use GPG, OpenSSH, BASH and Moshe Jacobson's "color" 
+shell utility. 
+
+"color" can be obtained at http://www.runslinux.net/projects.html
+
+Features:
+
+    * Written in BASH with minimal dependencies
+    * Provides a simple scripting language for defining what you’d like backed up
+    * Can be used on a multi-user system with each user defining what files they would like backed up via the scripting system (this is unsecure, presently, though)
+    * Uses GPG and your public key to encrypt the final backup archive before transmitting it to the remote host
+
+
+Requirements:
+
+    * A unix-like system
+    * GnuPG (for encryption)
+    * OpenSSH (for secure data transfer)
+    * GNU Tar (for backup storage)
+    * GZip (for backup compression)
+    * OpenSSH must be setup with an automatic authentication method, such as a public key cryptography
+
+Configuration consists of two steps, configuring the script’s overall options and writing one or more backup definition script.
+
+    1. Overall Configuration
+        The overall configuration is pretty easy. Copy 
+        configuration.inc.sh-sample to configuration.inc.sh and 
+        edit the values to meet your needs.
+        
+    2. Writing one or more backup definition scripts
+        This is described within comments in the sample script
+        located in individual_scripts/basic.inc.sh-sample .
+        
+Once configured, just run pebs.sh.
+
+

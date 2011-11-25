@@ -1,0 +1,44 @@
+#!/bin/bash
+#  PEBS - Pug's Extensible Backup System
+#     Copyright (C) 2006 James C. Jones
+#
+#  Backup infastructure written by James 'Pug' Jones <pug@pugsplace.net> on
+#  13 January 2006. These scripts are licensed under the GNU GPL version 2 
+#  or later. See the included LICENSE file.
+#
+#  These scripts use GPG, OpenSSH, BASH and Moshe Jacobson's "color" shell
+#  utility. "color" can be obtained at http://www.runslinux.net/projects.html
+#
+
+#Remote Backup Constants -- You'll have to change these.
+########################
+# This is the email address attached to your GPG public key. If this isn't 
+# correct, the script will fail on encryption
+encryptEmail=jcjones@ufl.edu
+
+# This is the SSH host (and username, if needed) where you want remote
+# backups to be copied using SCP. 
+# An example may be "backup-account@myoffsitebackups.net"
+remoteHostName="backup-account@myoffsitebackups.net"
+
+#Constants -- You shouldn't need to change these.
+########################
+# The tempDirectory is the root directory where all scripts should be told to
+# perform their backups. I suggest the /tmp/ dir.
+tempDirectory=/tmp/BackupLocation
+
+# This defines where the backup script files are located. Should not need
+# changing.
+scriptDir=$(pwd)/individual_scripts
+
+# This defines where the PEBS log is kept.
+logFile=$(pwd)/PEBS_backup_log
+
+# The date format. This format is simply the abbreviation of the day of the
+# week which makes PEBS overwrite last week's logs without any extra 
+# configuration.
+date=$(date +%a)
+
+# The final tar name. This is purely cosmetic.
+finalTar="Backup-$(hostname -s)-$date.tar"
+

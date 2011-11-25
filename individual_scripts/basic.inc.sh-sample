@@ -1,0 +1,41 @@
+#!/bin/bash
+# This file has inline documentation to discuss the two major script functions
+#   which make PEBS do its thing. There are also examples for you to model your
+#   scripts upon.
+
+# doMakeTar takes N arguments - the first argument MUST be a .tar file in 
+#   the $scriptTempDirectory. The remaining arguments are path arguments to the
+#   tar command, e.g. directories to backup. The following example backs up
+#   some important things on my computer's home directory.
+
+# backup files from my home directory
+doMakeTar $scriptTempDirectory/blah-homedirectory-$date.tar \
+	/home/blah/.config\
+	/home/blah/.gaim\
+	/home/blah/.fpm\
+	/home/blah/.*rc\
+	/home/blah/.gnupg\
+	/home/blah/.ssh\
+	/home/blah/.emacs\
+	/home/blah/.bashrc\
+	/home/blah/GnuCash\
+	/home/blah/.vim\
+	/home/blah/my-bookmarks.html
+
+# We do the doMakeTar as many times as we want to make a logical ordering of 
+#   files. 
+
+# backup the rest of my stuff
+doMakeTar $scriptTempDirectory/blah-documents-$date.tar /home/blah/Documents/
+
+# doMakeFinalTarball makes the .tar.gz file which is actually backed up -- if 
+#   you forget this step, you won't get anything in the resulting backup file! 
+#   With that said, it takes any number of arguments and all of these arguments
+#   are the .tar files created with the doMakeTar command above. So, basically,
+#   just make a list of your resulting .tar files here, like this:
+
+# The final backup tarball is made up of the otherstuff and the homedirectory.
+doMakeFinalTarball $scriptTempDirectory/blah-homedirectory-$date.tar\
+		$scriptTempDirectory/blah-documents-$date.tar
+
+

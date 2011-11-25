@@ -1,0 +1,6 @@
+#!/bin/sh
+target=$(basename $(pwd))
+tgzname="PEBS-$(date +%Y%m%d).tar.gz"
+pushd ..
+
+tar --exclude="*log" --exclude="*~" --exclude="configuration.inc.sh" --exclude="make_tarball" --exclude="*_files.inc.sh" -zcf $tgzname  $target
